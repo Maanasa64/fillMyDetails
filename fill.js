@@ -7,9 +7,10 @@ if (fillButton) {
   fillButton.addEventListener('click', () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const activeTab = tabs[0];
+      console.log(activeTab)
       chrome.scripting.executeScript({
-        target: { tabId: activeTab.id },
-        function: ()=>console.log("works")
+        injection:{ tabId: activeTab.id },
+        callback: fillInApplication
       });
     });
   });
