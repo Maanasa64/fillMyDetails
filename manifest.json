@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "AutoFill Internship Application",
+  "version": "1.0",
+  "description": "Automatically fills in internship application fields.",
+  "permissions": ["activeTab", "storage", "scripting"],
+  "action": {
+    "default_popup": "fill.html",
+    "default_icon": "images/icon16.png"
+  },
+  "icons": {
+    "16": "images/icon16.png"
+  }
+}
