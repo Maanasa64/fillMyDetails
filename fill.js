@@ -1,44 +1,53 @@
 const fillButton = document.getElementById('fillButton');
-console.log(fillButton)
-
 
 if (fillButton) {
-  console.log("fillButton is found.");
-  fillButton.addEventListener('click', () => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      const activeTab = tabs[0];
-      console.log(activeTab)
-      chrome.scripting.executeScript({
-        injection:{ tabId: activeTab.id },
-        callback: fillInApplication
-      });
+  fillButton.addEventListener('click', async () => {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    
+    await chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      function: fillInApplication
     });
   });
-} else {
-  console.log("Element with ID 'fillButton' not found.");
 }
 
 function fillInApplication() {
-  // const firstName = document.querySelector('First Name');
-  // console.log(firstName.textContent);
-  console.log('running')
-  document.querySelector('input[name="First Name"]').value = 'Maanasa';
-  document.querySelector('input[name="Last Name"]').value = 'Prasad';
-  document.querySelector('input[name="Email"]').value = 'mmprasad@ucsd.edu';
-  document.querySelector('input[name="Phone"]').value = '619-483-5914'; 
-  document.querySelector('input[name="City"]').value = 'San Diego';
-  document.querySelector('input[name="Country"]').value = 'United States';
-  document.querySelector('input[name="Zip"]').value = '92122'; 
-  document.querySelector('input[name="School"]').value = 'University of California San Diego';
-}
+  const fields = [
+    { name: 'First Name', value: 'Maanasa' },
+    { name: 'Last Name', value: 'Prasad' },
+    { name: 'Email', value: 'mmprasad@ucsd.edu' },
+    { name: 'Phone', value: '619-483-5914' },
+    { name: 'City', value: 'San Diego' },
+    { name: 'Country', value: 'United States' },
+    { name: 'Zip', value: '92122' },
+    { name: 'School', value: 'University of California San Diego' }
+  ];
 
-function execute() {
-  console.log('executing')
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-          const activeTab = tabs[0];
-          chrome.scripting.executeScript({
-            target: { tabId: activeTab.id },
-            function: fillInApplication
+  fields.forEach(field => {
+    const selectors = [
+      `input[name="${field.name}" i]`,
+      `input[placeholder*="${field.name}" i]`,
+      `input[id*="${field.name.toLowerCase()}"]`,
+      `input[data-testid*="${field.name.toLowerCase()}"]`,
+      `input[aria-label*="${field.name}" i]`
+    ];
+
+    for (const selector of selectors) {
+      const element = document.querySelector(selector);
+      if (element) {
+        element.focus();
+        element.value = field.value;
+
+        ['input', 'change', 'blur'].forEach(eventType => {
+          const event = new Event(eventType, {
+            bubbles: true,
+            cancelable: true
           });
+          element.dispatchEvent(event);
         });
+        
+        break;
+      }
+    }
+  });
 }
