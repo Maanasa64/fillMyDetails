@@ -5,6 +5,7 @@
   "description": "Automatically fills in internship application fields.",
   "permissions": ["activeTab", "scripting"],
   "action": {
-    "default_popup": "fill.html"
+    "default_popup": "fill.html",
+    "default_icon": "images/icon16.png"
   }
 }
