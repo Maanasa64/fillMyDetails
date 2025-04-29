@@ -11,8 +11,8 @@ Edit fill.js and update these fields:
 
 ```
 const fields = [
-  { name: 'First Name', value: 'Your Name' },
-  { name: 'Email', value: 'your@email.com' },
+  { name: 'First Name', value: 'Your First Name' },
+  { name: 'Last Name', value: 'Your Last Name' },
   // ... Add more fields as needed
 ];
 ```
