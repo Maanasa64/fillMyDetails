@@ -13,14 +13,16 @@ if (fillButton) {
 
 function fillInApplication() {
   const fields = [
-    { name: 'First Name', value: 'Maanasa' },
-    { name: 'Last Name', value: 'Prasad' },
-    { name: 'Email', value: 'mmprasad@ucsd.edu' },
-    { name: 'Phone', value: '619-483-5914' },
-    { name: 'City', value: 'San Diego' },
-    { name: 'Country', value: 'United States' },
-    { name: 'Zip', value: '92122' },
-    { name: 'School', value: 'University of California San Diego' }
+    { name: 'First Name', value: 'Your First Name' },
+    { name: 'Last Name', value: 'Your Last Name' },
+    { name: 'Middle Name', value: 'Your Middle Name' },
+    { name: 'Full Name', value: 'Your Full Name' },
+    { name: 'Email', value: 'Your Email Address' },
+    { name: 'Phone', value: 'Your Phone Number' },
+    { name: 'City', value: 'Your City' },
+    { name: 'Country', value: 'Your Country' },
+    { name: 'Zip', value: 'Your Zip Code' },
+    { name: 'School', value: 'Your School Name' }
   ];
 
   fields.forEach(field => {
